@@ -1,0 +1,16 @@
+{
+  "name": "load-data",
+  "version": "1.0.0",
+  "description": "A program for measuring an displaying load.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Greg Samek",
+  "license": "ISC",
+  "dependencies": {
+    "fs": "0.0.1-security",
+    "shelljs": "^0.7.7",
+    "socket.io": "^2.0.1"
+  }
+}
