@@ -1,7 +1,6 @@
 var DataStore = {
   storeSize10: [], // Stores last 10 minutes of load.
   storeSize2: [], // Stores last 2 minutes of load.
-  sum: 0,
 
   // Adds values to storeSize2 and storeSize10, ensures max size.
   addValue: function(value) {
@@ -22,11 +21,16 @@ var DataStore = {
 
   // Calculates 2 minute load average.
   getAverage: function() {
-    this.sum = this.storeSize2.reduce(function(sum, val) {
+    var sum = this.storeSize2.reduce(function(sum, val) {
       return sum + Number(val);
     }, 0);
+    var average = sum / this.storeSize2.length;
+    average = Number(Math.round(average+'e2')+'e-2'); // 2 digits.
+    return average;
+  },
 
-    return Math.round(this.sum / this.storeSize2.length) / 100;
+  getStore: function() {
+    return this.storeSize10.toString();
   }
 }
 

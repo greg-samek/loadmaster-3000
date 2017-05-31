@@ -19,9 +19,10 @@ function getLoad () {
   var command = "ps -A -o %cpu | awk '{s+=$1} END {print s }'",
     load = shell.exec(command, {silent:true}).stdout;
 
+  load = Math.round(load) / 100; // 0.01 .. 9.99
   DataStore.addValue(load);
   json.average = DataStore.getAverage();
-  json.store = DataStore.storeSize10.toString();
+  json.store = DataStore.getStore();
   io.sockets.send(json);
 }
 
