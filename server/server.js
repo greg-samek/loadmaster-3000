@@ -4,6 +4,10 @@ var fs = require('fs');
 var html = fs.readFileSync('index.html', 'utf8');
 var shell = require('shelljs');
 var DataStore = require("./DataStore");
+var json = {
+  "average": 0,
+  "store": []
+}
 
 function handler (req, res) {
   res.setHeader('Content-Type', 'text/html');
@@ -12,15 +16,13 @@ function handler (req, res) {
 }
 
 function getLoad () {
-  var average,
-    store,
-    command = "ps -A -o %cpu | awk '{s+=$1} END {print s }'",
+  var command = "ps -A -o %cpu | awk '{s+=$1} END {print s }'",
     load = shell.exec(command, {silent:true}).stdout;
 
   DataStore.addValue(load);
-  average = DataStore.getAverage();
-  store = DataStore.storeSize10.toString();
-  io.sockets.send(store);
+  json.average = DataStore.getAverage();
+  json.store = DataStore.storeSize10.toString();
+  io.sockets.send(json);
 }
 
 setInterval(getLoad, 1000);

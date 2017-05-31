@@ -5,12 +5,14 @@
     </script>
     <script type="text/javascript">
       var socket = io.connect();
-      socket.on('message', function(time) {
-          document.getElementById('time').innerHTML = time;
+      socket.on('message', function(json) {
+          document.getElementById('store').innerHTML = json.store;
+          document.getElementById('average').innerHTML = json.average;
       });
     </script>
   </head>
   <body>
-    Current Load: <b><span id="time"></span></b>
+    Current Load: <b><span id="store"></span></b>
+    Average Load: <b><span id="average"></span></b>
   </body>
 </html>
