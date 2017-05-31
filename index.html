@@ -1,18 +1,11 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.1/socket.io.js">
-    </script>
-    <script type="text/javascript">
-      var socket = io.connect();
-      socket.on('message', function(json) {
-          document.getElementById('store').innerHTML = json.store;
-          document.getElementById('average').innerHTML = json.average;
-      });
-    </script>
   </head>
   <body>
     Current Load: <b><span id="store"></span></b>
     Average Load: <b><span id="average"></span></b>
+    <main id="app">Hello world from HTML</main>
+    <script src="app.js" type="text/javascript"></script>
   </body>
 </html>

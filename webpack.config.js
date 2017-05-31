@@ -1,24 +1,13 @@
-var path = require('path');
-var webpack = require('webpack');
-
-var serverConfig = {
-  entry: './server/server.js',
-  target: 'node',
+const path = require('path');
+module.exports = {
+  entry: './app/index.js',
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'lib.node.js'
+    filename: 'app.js'
   },
   module: {
-      loaders: [
-          {
-              test: /\.js$/,
-              loader: 'babel-loader',
-              query: {
-                  presets: ['es2015']
-              }
-          }
-      ]
+    loaders: [
+      { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ },
+      { test: /\.jsx$/, loader: 'babel-loader', exclude: /node_modules/ }
+    ]
   }
-};
-
-module.exports = [ serverConfig ];
+}
