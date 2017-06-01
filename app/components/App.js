@@ -1,15 +1,17 @@
 import React from 'react';
 import { render } from 'react-dom';
-import Graph from './Graph';
+import Alerts from './Alerts';
 import Header from './Header';
+import Graph from './Graph';
+
 
 export default class App extends React.Component {
   render () {
-    const { store, average } = this.props;
+    const { store, messages } = this.props;
     return (<div>
       <Header></Header>
       <Graph data={store}></Graph>
-      <div>Average Load: <b><span>{average}</span></b></div>
+      <Alerts messages={messages}></Alerts>
     </div>)
   }
 }

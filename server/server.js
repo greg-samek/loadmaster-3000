@@ -42,6 +42,7 @@ function getLoad () {
   io.sockets.send(json);
 }
 
-setInterval(getLoad, 1000);
+getLoad();
+setInterval(getLoad, 10000);
 
 app.listen(8080);

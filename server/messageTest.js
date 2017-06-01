@@ -29,7 +29,7 @@ function alertFallBelow() {
   messages = Message.getMessages(1.2);
   messages = Message.getMessages(.5);
 
-  // This should alert once.
+  // This should alert twice.
   passed = messages.length === 2 ? "passed" : "failed";
   console.log("This test was: " + passed);
   console.log("messages: " + messages.toString());
