@@ -8,7 +8,6 @@ export default class Graph extends React.Component {
     let { data } = this.props;
     data = data.split(",");
     data = data.map( (value) => { return { 'load': Number(value) } }); // Array of objects.
-    console.log(JSON.stringify(data));
     return (
       <div id="graph-wrapper">
       <LineChart width={400} height={400} data={data}>

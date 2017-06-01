@@ -6,8 +6,9 @@ var js = fs.readFileSync('app.js', 'utf8');
 var css = fs.readFileSync('styles.css', 'utf8');
 var shell = require('shelljs');
 var DataStore = require("./DataStore");
+var Message = require("./Message");
 var json = {
-  "average": 0,
+  "messages": [],
   "store": []
 }
 
@@ -29,13 +30,15 @@ function handler (req, res) {
 
 function getLoad () {
   var command = "ps -A -o %cpu | awk '{s+=$1} END {print s }'",
-    load = shell.exec(command, {silent:true}).stdout;
+    load = shell.exec(command, {silent:true}).stdout,
+    store = DataStore.getStore();
 
   load = Math.round(load) / 100; // 0.01 .. 9.99
   DataStore.addValue(load);
-  json.average = DataStore.getAverage();
-  json.store = DataStore.getStore();
-  console.log(json);
+  json.store = store;
+  if ( store.length >= 12 ){ // 2 minutes have passed.
+    json.messages = Message.getMessages(DataStore.getAverage());
+  }
   io.sockets.send(json);
 }
 
