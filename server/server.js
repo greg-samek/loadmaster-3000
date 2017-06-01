@@ -6,8 +6,8 @@ var js = fs.readFileSync('app.js', 'utf8');
 var shell = require('shelljs');
 var DataStore = require("./DataStore");
 var json = {
-  "average": null,
-  "store": null
+  "average": 0,
+  "store": []
 }
 
 function handler (req, res) {
@@ -30,9 +30,10 @@ function getLoad () {
   DataStore.addValue(load);
   json.average = DataStore.getAverage();
   json.store = DataStore.getStore();
+  console.log(json);
   io.sockets.send(json);
 }
 
-setInterval(getLoad, 10000);
+setInterval(getLoad, 1000);
 
 app.listen(8080);
