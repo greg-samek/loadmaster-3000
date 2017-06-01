@@ -10,9 +10,11 @@ export default class Graph extends React.Component {
     data = data.map( (value) => { return { 'load': Number(value) } }); // Array of objects.
     console.log(JSON.stringify(data));
     return (
+      <div id="graph-wrapper">
       <LineChart width={400} height={400} data={data}>
         <Line type="monotone" dataKey="load" stroke="#8884d8" />
         <YAxis />
-      </LineChart> )
+      </LineChart>
+      </div>)
   }
 }
