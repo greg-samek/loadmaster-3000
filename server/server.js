@@ -3,6 +3,7 @@ var io = require('socket.io').listen(app);
 var fs = require('fs');
 var html = fs.readFileSync('index.html', 'utf8');
 var js = fs.readFileSync('app.js', 'utf8');
+var css = fs.readFileSync('styles.css', 'utf8');
 var shell = require('shelljs');
 var DataStore = require("./DataStore");
 var json = {
@@ -15,6 +16,10 @@ function handler (req, res) {
     res.setHeader('Content-Type', 'application/javascript');
     res.setHeader('Content-Length', Buffer.byteLength(js, 'utf8'));
     res.end(js);
+  } else if (req.url === '/styles.css') {
+    res.setHeader('Content-Type', 'text/css');
+    res.setHeader('Content-Length', Buffer.byteLength(css, 'utf8'));
+    res.end(css);
   } else {
     res.setHeader('Content-Type', 'text/html');
     res.setHeader('Content-Length', Buffer.byteLength(html, 'utf8'));
